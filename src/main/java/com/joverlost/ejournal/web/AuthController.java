@@ -79,6 +79,12 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest, BindingResult bindingResult) {
 
+        List<User> userExist=userRespository.findAll();
+
+        if(!userExist.isEmpty()){
+            return new ResponseEntity<>(new MessageResponse("Пользователь существует"),HttpStatus.BAD_REQUEST);
+        }
+
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) return errors;
 
@@ -91,12 +97,10 @@ public class AuthController {
         User user = new User(
                 signupRequest.getEmail(),
                 passwordEncoder.encode(signupRequest.getPassword()));
-        user.setFirstname(signupRequest.getFirstname());
-        user.setLastname(signupRequest.getLastname());
         Set<Role> roles = new HashSet<>();
         Role userRole = roleRepository
-                .findByName(ERole.ROLE_STUDENT)
-                .orElseThrow(() -> new RuntimeException("Ошибка! Пользователь 'Студент' не найден"));
+                .findByName(ERole.ROLE_ADMIN)
+                .orElseThrow(() -> new RuntimeException("Ошибка! Пользователь 'Админ' не найден"));
         roles.add(userRole);
         user.setRoles(roles);
         userRespository.save(user);

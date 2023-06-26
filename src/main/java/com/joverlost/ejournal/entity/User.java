@@ -20,10 +20,6 @@ public class User {
     private Long id;
     private String email;
     private String password;
-    @Column(nullable = false,length = 20)
-    private String firstname;
-    @Column(nullable = false,length = 20)
-    private String lastname;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

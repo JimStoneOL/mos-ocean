@@ -2,23 +2,24 @@ package com.joverlost.ejournal.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Entity
-public class Estimation {
+public class EventDate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Range(min = 1, max = 5)
-    private Integer number;
-    @JsonFormat(pattern = "dd-mm-yyyy ss:mm:HH")
-    private LocalDateTime date;
+    @JsonFormat(pattern = "dd-mm-yyyy")
+    private LocalDate localDate;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    private Student student;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    private Subject subject;
+    private Event event;
+    @OneToMany(mappedBy = "eventDate")
+    private List<EventTime> eventTimeList;
 }
