@@ -1,7 +1,6 @@
 package com.joverlost.ejournal.web;
 
 
-import com.joverlost.ejournal.entity.Role;
 import com.joverlost.ejournal.entity.User;
 import com.joverlost.ejournal.entity.enums.ERole;
 import com.joverlost.ejournal.payload.request.LoginRequest;

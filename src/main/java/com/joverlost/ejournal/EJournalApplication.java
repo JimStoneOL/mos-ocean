@@ -1,6 +1,5 @@
 package com.joverlost.ejournal;
 
-import com.joverlost.ejournal.entity.Role;
 import com.joverlost.ejournal.entity.enums.ERole;
 import com.joverlost.ejournal.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
