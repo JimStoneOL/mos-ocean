@@ -25,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
@@ -105,5 +106,10 @@ public class AuthController {
         user.setRoles(roles);
         userRespository.save(user);
         return ResponseEntity.ok(new MessageResponse("Регистрация прошла успешно"));
+    }
+
+    @GetMapping("/getIp")
+    public String getIp(HttpServletRequest httpServletRequest){
+        return httpServletRequest.getRemoteAddr();
     }
 }
