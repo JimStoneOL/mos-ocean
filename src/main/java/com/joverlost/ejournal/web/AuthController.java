@@ -108,8 +108,4 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("Регистрация прошла успешно"));
     }
 
-    @GetMapping("/getIp")
-    public String getIp(HttpServletRequest httpServletRequest){
-        return httpServletRequest.getRemoteAddr();
-    }
 }
